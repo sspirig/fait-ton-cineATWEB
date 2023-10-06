@@ -1,0 +1,101 @@
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #2b2b2b;
+}
+
+header, footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #c80404;
+    background-color: #2a2a2a;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.377) 0px 5px 15px 0px;
+}
+
+footer div {
+    padding: 10px;
+}
+
+header h1 {
+    text-shadow: 2px 5px 15px #6a0c0c;
+    font-size:3rem;
+}
+
+header div {
+    padding: 1rem;
+}
+
+section {
+    height: 100vh;
+}
+
+.input {
+    color: #fefefe;
+    border: 2px solid #c80404;
+    border-radius: 10px;
+    padding: 1rem;
+    background: transparent;
+    min-width: 50%;
+    transition: 0.5s;
+}
+
+.input:hover {
+    box-shadow: 2px 2px 15px #c80404 inset;
+}
+
+a {
+    color: whitesmoke;
+    text-decoration: none;
+    padding: 17px 40px;
+    border-radius: 50px;
+    border: 0;
+    background-color: rgb(13, 13, 13);
+    box-shadow: rgba(220, 216, 216, 0.05) 0 0 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all .5s ease;
+    margin: 5px;
+}
+
+.button:hover {
+    background-color: hsl(0, 80%, 48%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(220, 24, 53) 0px 7px 29px 0px;
+
+}
+
+a:active {
+    background-color: hsl(352, 82%, 45%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(220, 24, 24) 0px 0px 0px 0px;
+    transform: translateY(10px);
+    transition: 100ms;
+}
+
+/* LOGIN */
+.flexForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    min-width: 25vw;
+}
+
+label {
+    color: #c80404;
+    text-shadow:1px 1px 2px #000000;
+}
+
+
+.inputDiv {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Acceuil-fait ton ciné</title>
+</head>
+<!-- 
+    Auteur : Yoan BMPS et Santiago SPRG
+    Projet : Fais ton ciné
+    Détail : Page de login
+    Date : 29.09.2023
+    Version : v1
+ -->
+<body>
+    <header>
+        <div></div> <!-- Future place ptt logo -->
+        <h1>Login</h1>
+        <div><a class="button" href="index.html">Acceuil</a><a  class="button" href="aide.html">Aide</a></div> <!-- Changer le lien -->
+    </header>
+    <main class="flexForm">
+        <form action="script.php" method="post">
+            <div class="inputDiv">
+                <label for="username">Utilisateur :</label>
+                <input type="text" name="username" id="username" class="input" placeholder="Nom d'utilisateur" value="">
+            </div>
+            <div class="inputDiv">
+                <label for="email">Email :</label>
+                <input type="email" name="email" id="email" class="input" placeholder="Email" value="">
+            </div>
+            <div class="inputDiv">
+                <label for="mdp">Mot de passe :</label>
+                <input type="mdp" name="mdp" id="mdp" class="input" placeholder="Mot de passe" value="">
+            </div>
+        </form>
+    </main>
+    <footer>
+        <div>
+            Auteur : Yoan BMPS & Santiago SPRG <br>
+            Projet : fais ton ciné <br>
+            Atelier: Web <br>
+        </div>
+    </footer>
+</body>
+</html>
