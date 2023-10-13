@@ -20,21 +20,21 @@
         <div><a class="button" href="index.html">Acceuil</a><a class="button" href="aide.html">Aide</a></div> <!-- Changer le lien -->
     </header>
     <main class="flexForm">
-        <form action="script.php" method="post">
+        <form action="login.php" method="post">
             <div class="inputDiv">
                 <label for="username">Utilisateur :</label>
-                <input type="text" name="username" id="username" class="input" placeholder="Nom d'utilisateur" value="">
+                <input type="text" name="username" id="username" class="input" placeholder="nom d'utilisateur" value="">
             </div>
             <div class="inputDiv">
                 <label for="email">Email :</label>
-                <input type="email" name="email" id="email" class="input" placeholder="Email" value="">
+                <input type="email" name="email" id="email" class="input" placeholder="email" value="">
             </div>
             <div class="inputDiv">
                 <label for="mdp">Mot de passe :</label>
-                <input type="mdp" name="mdp" id="mdp" class="input" placeholder="Mot de passe" value="">
+                <input type="password" name="mdp" id="mdp" class="input" placeholder="mot de passe" value="">
             </div>
             <div class="inputBtn">
-                <input class="buttonLien" type="button" value="Connexion">
+                <button class="buttonLien" type="submit">Connexion</button>
             </div>
         </form>
     </main>
