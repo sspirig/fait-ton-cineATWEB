@@ -27,7 +27,40 @@ header div {
 }
 
 section {
-    height: 100vh;
+    padding: 1rem;
+    height: 10vh;
+}
+
+.filmContainer {
+    position: relative;
+    text-align: center;
+    font-size:1.5rem;
+    color: #c80404;
+    text-shadow: 2px 5px 15px #6a0c0c;
+}
+
+.film {
+    max-width: 350px; 
+    max-height: 494px;
+    opacity: 100%;
+    transition: 0.5s;
+}
+.film:hover {
+    opacity: 30%;
+    transition: 0.5s;
+}
+
+.textImage {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.film:hover .txtimg {
+    display: flex;
+    transition: display 0.5s;
 }
 
 .input {
@@ -42,6 +75,7 @@ section {
 
 .input:hover {
     box-shadow: 2px 2px 15px #c80404 inset;
+
 }
 
 a {

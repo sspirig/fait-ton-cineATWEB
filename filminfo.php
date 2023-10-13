@@ -1,12 +1,14 @@
-<?php   
+<?php
+$filmNom = "";
+$image = "";
 $film = filter_input(INPUT_GET, "film", FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 switch ($film) {
-    case "filmAction":
-        $filmNom = "Film Action"
-        $image = "img/placeholder.jpg"
+    case "%27filmAction%27":
+        $filmNom = "Film Action";
+        $image = "img/placeholder.jpg";
         break;
     default:
-        # code...
+        
         break;
 }
 ?>
@@ -21,19 +23,20 @@ switch ($film) {
 <!-- 
     Auteur : Yoan BMPS et Santiago SPRG
     Projet : Fais ton ciné
-    Détail : Page d'info 
+    Détail : Page d'informations du films
     Date : 29.09.2023
  -->
 <body>
     <header>
         <div></div> <!-- Future place ptt logo -->
-        <h1>Informations</h1>
+        <h1>Informations sur <?=$filmNom?></h1>
         <div><a class="button" href="login.html">Login</a><a  class="button" href="aide.html">Aide</a></div> <!-- Changer le lien -->
     </header>
     <main>
         <section>
             <?php
-            echo $film
+            echo "<h1>{$filmNom}</h1>";
+            echo "<img src=\"$image\" alt=\"filmAction\">";
             ?>
         </section>
     </main>
