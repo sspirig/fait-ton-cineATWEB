@@ -1,3 +1,15 @@
+<?php   
+$film = filter_input(INPUT_GET, "film", FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+switch ($film) {
+    case "filmAction":
+        $filmNom = "Film Action"
+        $image = "img/placeholder.jpg"
+        break;
+    default:
+        # code...
+        break;
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,23 +21,21 @@
 <!-- 
     Auteur : Yoan BMPS et Santiago SPRG
     Projet : Fais ton ciné
-    Détail : Page d'acceuil
+    Détail : Page d'info 
     Date : 29.09.2023
  -->
 <body>
     <header>
         <div></div> <!-- Future place ptt logo -->
-        <h1>Fais ton ciné</h1>
+        <h1>Informations</h1>
         <div><a class="button" href="login.html">Login</a><a  class="button" href="aide.html">Aide</a></div> <!-- Changer le lien -->
     </header>
     <main>
         <section>
-            <input type="text" name="search" class="input" placeholder="Rechercher quelque chose....">
+            <?php
+            echo $film
+            ?>
         </section>
-        <article onclick="Javascript:window.document.location.href='filminfo.php?film=\'filmAction\'';">
-            <img src="img/placeholder.jpg" alt="placeholder">
-            <h3>film Action</h3>
-        </article>
     </main>
     <footer>
         <div>
