@@ -27,7 +27,8 @@ header div {
 }
 
 section {
-    height: 100vh;
+    height: 10vh;
+    padding: 1rem;
 }
 
 .input {
@@ -103,4 +104,13 @@ label {
 .inputBtn{
     display: flex;
     justify-content: center;
+}
+
+
+/* ADMIN */
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
 }
