@@ -1,27 +1,31 @@
+<?php
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Acceuil-fait ton ciné</title>
+    <title>Script.php</title>
 </head>
 <!-- 
     Auteur : Yoan BMPS et Santiago SPRG
     Projet : Fais ton ciné
-    Détail : Page d'acceuil
-    Date : 29.09.2023
+    Détail : Page script
+    Date : 13.10.2023
     Version : v1
  -->
 <body>
     <header>
         <div></div> <!-- Future place ptt logo -->
         <h1>Fais ton ciné</h1>
-        <div><a class="button" href="login.html">Login</a><a class="button" href="aide.html">Aide</a></div> <!-- Changer le lien -->
+        <div><a class="button" href="login.html">Login</a><a class="button" href="aide.html">Aide</a></div>
     </header>
     <main>
         <section>
-            <input type="text" name="search" class="input" placeholder="Rechercher quelque chose....">
+            <?= "Suite..." ?>
         </section>
         <article>
 

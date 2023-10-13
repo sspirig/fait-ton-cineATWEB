@@ -1,27 +1,41 @@
+<?php
+    $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_STRING);
+    $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
+    $mdp = filter_input(INPUT_POST, "mdp", FILTER_SANITIZE_STRING);
+    $text_error = null;
+
+    if ($mdp === "Super") {
+        $text_error = "Mot de passe correct. Bienvenue, $username !";
+    } else {
+        header("Location: index.html");
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Acceuil-fait ton ciné</title>
+    <title>Script.php</title>
 </head>
 <!-- 
     Auteur : Yoan BMPS et Santiago SPRG
     Projet : Fais ton ciné
-    Détail : Page d'acceuil
-    Date : 29.09.2023
+    Détail : Page script
+    Date : 13.10.2023
     Version : v1
  -->
 <body>
     <header>
         <div></div> <!-- Future place ptt logo -->
         <h1>Fais ton ciné</h1>
-        <div><a class="button" href="login.html">Login</a><a class="button" href="aide.html">Aide</a></div> <!-- Changer le lien -->
+        <div><a class="button" href="login.html">Login</a><a class="button" href="aide.html">Aide</a></div>
     </header>
     <main>
         <section>
-            <input type="text" name="search" class="input" placeholder="Rechercher quelque chose....">
+            <?= $text_error ?>
         </section>
         <article>
 
