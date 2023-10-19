@@ -78,7 +78,7 @@ section {
 
 }
 
-a {
+a, .buttonLien {
     color: whitesmoke;
     text-decoration: none;
     padding: 17px 40px;
@@ -93,14 +93,14 @@ a {
     margin: 5px;
 }
 
-.button:hover {
+.button:hover, .buttonLien:hover {
     background-color: hsl(0, 80%, 48%);
     color: hsl(0, 0%, 100%);
     box-shadow: rgb(220, 24, 53) 0px 7px 29px 0px;
 
 }
 
-a:active {
+a:active, .buttonLien:active {
     background-color: hsl(352, 82%, 45%);
     color: hsl(0, 0%, 100%);
     box-shadow: rgb(220, 24, 24) 0px 0px 0px 0px;
@@ -108,7 +108,7 @@ a:active {
     transition: 100ms;
 }
 
-/* LOGIN */
+/* FORM */
 .flexForm {
     display: flex;
     flex-direction: column;
@@ -132,4 +132,9 @@ label {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+}
+
+.inputBtn{
+    display: flex;
+    justify-content: center;
 }
