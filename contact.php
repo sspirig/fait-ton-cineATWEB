@@ -21,7 +21,7 @@
     <header>
         <div></div> <!-- Future place ptt logo -->
         <h1>Fais ton ciné</h1>
-        <div><a class="button" href="login.html">Login</a><a class="button" href="aide.html">Aide</a></div>
+        <div><a class="button" href="login.html">Login</a><a class="button" href="index.html">Acceuil</a></div>
     </header>
     <main>
         <section>

@@ -32,11 +32,24 @@ section {
 }
 
 .filmContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     position: relative;
+    align-items: center;
     text-align: center;
     font-size:1.5rem;
     color: #c80404;
     text-shadow: 2px 5px 15px #6a0c0c;
+    padding: 0.4rem;
+}
+
+#separatorDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.1rem;
 }
 
 .film {
@@ -50,18 +63,7 @@ section {
     transition: 0.5s;
 }
 
-.textImage {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
 
-.film:hover .txtimg {
-    display: flex;
-    transition: display 0.5s;
-}
 
 .input {
     color: #fefefe;
@@ -81,7 +83,7 @@ section {
 a, .buttonLien {
     color: whitesmoke;
     text-decoration: none;
-    padding: 17px 40px;
+    padding: 17px 40px; 
     border-radius: 50px;
     border: 0;
     background-color: rgb(13, 13, 13);
@@ -91,6 +93,24 @@ a, .buttonLien {
     font-size: 15px;
     transition: all .5s ease;
     margin: 5px;
+}
+
+/* .buttonPressed {
+    color: whitesmoke;
+    text-decoration: none;
+    border-radius: 50px;
+    border: 0;
+    background-color: hsl(0, 80%, 48%);
+    box-shadow: rgba(220, 216, 216, 0.05) 0 0 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all .5s ease;
+    margin: 5px;
+} */
+
+.buttonPressed:hover {
+    background-color: rgb(13, 13, 13);
 }
 
 .button:hover, .buttonLien:hover {

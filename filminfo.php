@@ -5,7 +5,11 @@ $film = filter_input(INPUT_GET, "film", FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 switch ($film) {
     case "%27filmAction%27":
         $filmNom = "Film Action";
-        $image = "img/placeholder.jpg";
+        $image = "<img src=\"img/placeholder.jpg\" alt=\"filmAction\">";
+        break;
+    case "%27filmInformatique%27":
+        $filmNom = "Film d'Informatique";
+        $image = "<img src=\"img/placeholder.jpg\" alt=\"filmInformatique\">";
         break;
     default:
         
@@ -35,8 +39,11 @@ switch ($film) {
     <main>
         <section>
             <?php
-            echo "<h1>{$filmNom}</h1>";
-            echo "<img src=\"$image\" alt=\"filmAction\">";
+            if ($filmNom != null)
+            {
+                echo "<h1>{$filmNom}</h1>";
+                echo $image;
+            }
             ?>
         </section>
     </main>
