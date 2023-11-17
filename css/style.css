@@ -27,8 +27,43 @@ header div {
 }
 
 section {
-    height: 100vh;
+    padding: 1rem;
+    height: 10vh;
 }
+
+.filmContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    text-align: center;
+    font-size:1.5rem;
+    color: #c80404;
+    text-shadow: 2px 5px 15px #6a0c0c;
+    padding: 0.4rem;
+}
+
+#separatorDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.1rem;
+}
+
+.film {
+    max-width: 350px; 
+    max-height: 494px;
+    opacity: 100%;
+    transition: 0.5s;
+}
+.film:hover {
+    opacity: 30%;
+    transition: 0.5s;
+}
+
+
 
 .input {
     color: #fefefe;
@@ -42,12 +77,13 @@ section {
 
 .input:hover {
     box-shadow: 2px 2px 15px #c80404 inset;
+
 }
 
 a, .buttonLien {
     color: whitesmoke;
     text-decoration: none;
-    padding: 17px 40px;
+    padding: 17px 40px; 
     border-radius: 50px;
     border: 0;
     background-color: rgb(13, 13, 13);
@@ -59,7 +95,27 @@ a, .buttonLien {
     margin: 5px;
 }
 
-.button:hover, .buttonLien:hover {
+.buttonPressed {
+    color: whitesmoke;
+    text-decoration: none;
+    padding: 17px 40px; 
+    border-radius: 50px;
+    border: 0;
+    background-color:  hsl(352, 82%, 45%);
+    box-shadow: rgba(220, 216, 216, 0.05) 0 0 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all .5s ease;
+    margin: 5px;
+}
+
+.buttonPressed:hover {
+    background-color: rgb(236, 61, 61);
+    box-shadow: rgb(163, 17, 39) 0px 2px 14px 0px;
+}
+
+.button:hover, .buttonLien:hover, .buttonPressed {
     background-color: hsl(0, 80%, 48%);
     color: hsl(0, 0%, 100%);
     box-shadow: rgb(220, 24, 53) 0px 7px 29px 0px;
@@ -70,6 +126,14 @@ a:active, .buttonLien:active {
     background-color: hsl(352, 82%, 45%);
     color: hsl(0, 0%, 100%);
     box-shadow: rgb(220, 24, 24) 0px 0px 0px 0px;
+    transform: translateY(10px);
+    transition: 100ms;
+}
+
+.buttonPressed:active {
+    background-color: rgb(13, 13, 13);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(96, 47, 47) 0px 0px 0px 0px;
     transform: translateY(10px);
     transition: 100ms;
 }
