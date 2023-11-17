@@ -29,7 +29,7 @@
     <header>
         <div></div> <!-- Future place ptt logo -->
         <h1>Aide</h1>
-        <div><a class="button" href="login.html">Login</a><a class="button" href="index.html">Acceuil</a></div> <!-- Changer le lien -->
+        <div><a class="button" href="login.html">Login</a><a class="button" href="index.php">Acceuil</a></div> <!-- Changer le lien -->
     </header>
     <main class="flexForm">
         <?php if(!isset($_POST["submit"])) { ?>
