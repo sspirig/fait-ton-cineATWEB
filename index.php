@@ -91,19 +91,7 @@ if (array_key_exists("filter",$_GET))
     $attributesNewest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=newest&checked=true';\"";
 }
 // organisation
-// $dsn = "mysql:host=localhost;dbname=dbmonstres;charset=utf8";
-// $opt = [
-//     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-//     PDO::ATTR_EMULATE_PREPARES => false
-// ];
 
-// $pdo = new PDO($dsn, "monstres_dba", "MegaSecret", $opt);
-
-// //$id = filter_input(INPUT_POST, "selectedId", FILTER_VALIDATE_INT);
-// $statement = $pdo->prepare("SELECT  FROM monstres WHERE id = :id");
-// $statement->execute([
-//     ':id' => $id
-// ]);
 
 // var_dump($_GET);
 ?>
@@ -129,7 +117,7 @@ if (array_key_exists("filter",$_GET))
     </header>
     <main>
         <section>
-            <p style="color: whitesmoke; text-shadow: 1px 1px 1px #c80404;"><b>Filtrer par : </b></p>
+            <p class="whiteTxt"><b>Filtrer par : </b></p>
             <button <?php echo $attributesTitle; ?>>Titre</button>
             <button <?php echo $attributesReal; ?>>Réalisateur</button>
             <button <?php echo $attributesCategory; ?>>Genre</button>

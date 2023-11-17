@@ -57,6 +57,34 @@
         echo "</div>";
         echo "</form>";
     }
+
+    $dsn = "mysql:host=localhost;dbname=cinema;charset=utf8";
+    $opt = [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_EMULATE_PREPARES => false
+    ];
+
+    $pdo = new PDO($dsn, "adminCinema", "Super", $opt);
+
+    //$id = filter_input(INPUT_POST, "selectedId", FILTER_VALIDATE_INT);
+    $statement = $pdo->prepare("SELECT * FROM cinema.films");
+    $statement->execute();
+
+    $record = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    $tableauFilms = [
+        
+    ];
+
+    //var_dump($record);
+    foreach ($record as $key => $value){
+        // foreach ($ as $key => $value) {
+        //     # code...
+        // }
+        $tableauFilms[] = $value[$var];
+    }
+    var_dump($tableauTitre);
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -111,7 +139,7 @@
     </header>
     <main>
         <nav>
-            <div>
+            <div class="adminBar">
                 <?php
                 // Affichez les liens en fonction de la variable $liens
                 foreach ($categories as $cat) {
@@ -120,12 +148,17 @@
                 ?>
             </div>
         </nav>
+        <section>
+            <?php
+                //foreach
+            ?>
+        </section>
         <article class="flexForm">
             <?php
             // Affichez les formulaires et boutons pour chaque catégorie
             foreach ($categories as $cat) {
                 echo "<div id='{$cat}Actions' style='display: none'>";
-                echo "<h2>$cat</h2>";
+                echo "<h2 class=\"whiteTxt\">$cat</h2>";
                 echo "<button class='buttonLien' onclick=\"toggleForm('ajouter{$cat}Form')\">Ajouter</button>";
                 echo "<button class='buttonLien' onclick=\"toggleForm('modifier{$cat}Form')\">Modifier</button>";
                 echo "<button class='buttonLien' onclick=\"toggleForm('supprimer{$cat}Form')\">Supprimer</button>";
