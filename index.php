@@ -122,7 +122,7 @@ var_dump($_GET);
             <button <?php echo $attributesNewest; ?>>Dernières sorties</button>
             <button <?php echo $attributesLatest; ?>>Anciennes sorties</button>
         </section>
-        <!-- <article class="filmContainer">
+        <article class="filmContainer">
             <div id="separatorDiv">
                 <img class="film" src="img/placeholder.jpg" alt="placeholder" onclick="window.document.location.href='filminfo.php?film=filmAction';">
                 <span class="txtimg">film Action</span>
@@ -147,7 +147,7 @@ var_dump($_GET);
                 <img class="film" src="img/placeholder.jpg" alt="placeholder" onclick="window.document.location.href='filminfo.php?film=filmAction';">
                 <span class="txtimg">film Action</span>
             </div>
-        </article> -->
+        </article>
     </main>
     <footer>
         <div>
