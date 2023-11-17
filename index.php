@@ -6,91 +6,106 @@ $attributesActor = "";
 $attributesLatest = "";
 $attributesNewest = "";
 $filter = filter_input(INPUT_GET, "filter", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$checked = filter_input(INPUT_GET, "checked", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$checked = filter_input(INPUT_GET, "checked", FILTER_VALIDATE_BOOL);
 //1 ere fois : $filter = false, $checked = false
-//2e : $filter = 'title', $checked = false sauf 
+//2e : $filter = 'title', $checked = true
 //3e fois $filter = 'title', $checked = true
-if ($filter != null)
+if (array_key_exists("filter",$_GET))
 {
-    //2e fois
-    if (!$checked)
-    {///////// METTRE & entre
-        switch ($filter) {
+    //echo "Arrivé dedans".var_dump($filter);
+    if ($checked)
+    {
+        switch ($filter ) {
             case 'title':
-                $attributesTitle = "class=\"buttonPressed\" onclick=\"window.document.location.href='index.php?filter=title;checked=true';\"";
+                $attributesTitle = "class=\"buttonPressed\" onclick=\"window.document.location.href='index.php?filter=title&checked=false';\"";
     
-                $attributesReal = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=real;checked=false';\"";
-                $attributesCategory = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=category;checked=false';\"";
-                $attributesActor = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=actor;checked=false';\"";
-                $attributesLatest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=latest;checked=false';\"";
-                $attributesNewest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=newest;checked=false';\"";
+                $attributesReal = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=real&checked=true';\"";
+                $attributesCategory = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=category&checked=true';\"";
+                $attributesActor = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=actor&checked=true';\"";
+                $attributesLatest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=latest&checked=true';\"";
+                $attributesNewest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=newest&checked=true';\"";
                 break;
             case 'real':
-                $attributesReal = "class=\"buttonPressed\" onclick=\"window.document.location.href='index.php?filter=real;checked=true';\"";
+                $attributesReal = "class=\"buttonPressed\" onclick=\"window.document.location.href='index.php?filter=real&checked=false';\"";
     
-                $attributesTitle = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=title;checked=false';\"";
-                $attributesCategory = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=category;checked=false';\"";
-                $attributesActor = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=actor;checked=false';\"";
-                $attributesLatest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=latest;checked=false';\"";
-                $attributesNewest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=newest&checked=false';\"";
+                $attributesTitle = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=title&checked=true';\"";
+                $attributesCategory = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=category&checked=true';\"";
+                $attributesActor = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=actor&checked=true';\"";
+                $attributesLatest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=latest&checked=true';\"";
+                $attributesNewest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=newest&checked=true';\"";
                 break;
             case 'category':
-                $attributesCategory = "class=\"buttonPressed\" onclick=\"window.document.location.href='index.php?filter=category&checked=true';\"";
+                $attributesCategory = "class=\"buttonPressed\" onclick=\"window.document.location.href='index.php?filter=category&checked=false';\"";
     
-                $attributesTitle = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=title&checked=false';\"";
-                $attributesReal = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=real&checked=false';\"";
-                $attributesActor = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=actor&checked=false';\"";
-                $attributesLatest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=latest&checked=false';\"";
-                $attributesNewest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=newest&checked=false';\"";
+                $attributesTitle = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=title&checked=true';\"";
+                $attributesReal = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=real&checked=true';\"";
+                $attributesActor = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=actor&checked=true';\"";
+                $attributesLatest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=latest&checked=true';\"";
+                $attributesNewest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=newest&checked=true';\"";
                 break;
             case 'actor':
-                $attributesActor = "class=\"buttonPressed\" onclick=\"window.document.location.href='index.php?filter=actor&checked=true';\"";
+                $attributesActor = "class=\"buttonPressed\" onclick=\"window.document.location.href='index.php?filter=actor&checked=false';\"";
     
-                $attributesTitle = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=title&checked=false';\"";
-                $attributesReal = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=real&checked=false';\"";
-                $attributesCategory = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=category&checked=false';\"";
-                $attributesLatest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=latest&checked=false';\"";
-                $attributesNewest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=newest&checked=false';\"";
+                $attributesTitle = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=title&checked=true';\"";
+                $attributesReal = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=real&checked=true';\"";
+                $attributesCategory = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=category&checked=true';\"";
+                $attributesLatest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=latest&checked=true';\"";
+                $attributesNewest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=newest&checked=true';\"";
                 break;
             case 'latest':
-                $attributesLatest = "class=\"buttonPressed\" onclick=\"window.document.location.href='index.php?filter=latest&checked=true';\"";
+                $attributesLatest = "class=\"buttonPressed\" onclick=\"window.document.location.href='index.php?filter=latest&checked=false';\"";
     
-                $attributesTitle = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=title&checked=false';\"";
-                $attributesReal = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=real&checked=false';\"";
-                $attributesActor = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=actor&checked=false';\"";
-                $attributesNewest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=newest&checked=false';\"";
+                $attributesTitle = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=title&checked=true';\"";
+                $attributesReal = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=real&checked=true';\"";
+                $attributesCategory = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=category&checked=true';\"";
+                $attributesActor = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=actor&checked=true';\"";
+                $attributesNewest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=newest&checked=true';\"";
                 break;
             case 'newest':
-                $attributesNewest = "class=\"buttonPressed\" onclick=\"window.document.location.href='index.php?filter=newest&checked=true';\"";
+                $attributesNewest = "class=\"buttonPressed\" onclick=\"window.document.location.href='index.php?filter=newest&checked=false';\"";
     
-                $attributesTitle = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=title&checked=false';\"";
-                $attributesReal = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=real&checked=false';\"";
-                $attributesCategory = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=category&checked=false';\"";
-                $attributesActor = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=actor&checked=false';\"";
-                $attributesLatest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=latest&checked=false';\"";
+                $attributesTitle = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=title&checked=true';\"";
+                $attributesReal = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=real&checked=true';\"";
+                $attributesCategory = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=category&checked=true';\"";
+                $attributesActor = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=actor&checked=true';\"";
+                $attributesLatest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=latest&checked=true';\"";
                 break;
         }
     }
-    // 3e fois (déselection)
-    else {
-        $attributesTitle = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=title;checked=false';\"";
-        $attributesReal = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=real;checked=false';\"";
-        $attributesCategory = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=category;checked=false';\"";
-        $attributesActor = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=actor;checked=false';\"";
-        $attributesLatest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=latest;checked=false';\"";
-        $attributesNewest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=newest;checked=false';\"";
+    else {// quand on deselectionne
+        $attributesTitle = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=title&checked=true';\"";
+        $attributesReal = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=real&checked=true';\"";
+        $attributesCategory = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=category&checked=true';\"";
+        $attributesActor = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=actor&checked=true';\"";
+        $attributesLatest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=latest&checked=true';\"";
+        $attributesNewest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=newest&checked=true';\"";
     }
     
 } else { // 1ere fois // a faire elseif else
-    $attributesTitle = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=title;checked=false';\"";
-    $attributesReal = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=real;checked=false';\"";
-    $attributesCategory = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=category;checked=false';\"";
-    $attributesActor = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=actor;checked=false';\"";
-    $attributesLatest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=latest;checked=false';\"";
-    $attributesNewest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=newest;checked=false';\"";
+    //echo "arrivé 1ere fois\n";
+    $attributesTitle = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=title&checked=true';\"";
+    $attributesReal = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=real&checked=true';\"";
+    $attributesCategory = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=category&checked=true';\"";
+    $attributesActor = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=actor&checked=true';\"";
+    $attributesLatest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=latest&checked=true';\"";
+    $attributesNewest = "class=\"buttonLien\" onclick=\"window.document.location.href='index.php?filter=newest&checked=true';\"";
 }
+// organisation
+// $dsn = "mysql:host=localhost;dbname=dbmonstres;charset=utf8";
+// $opt = [
+//     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+//     PDO::ATTR_EMULATE_PREPARES => false
+// ];
 
-var_dump($_GET);
+// $pdo = new PDO($dsn, "monstres_dba", "MegaSecret", $opt);
+
+// //$id = filter_input(INPUT_POST, "selectedId", FILTER_VALIDATE_INT);
+// $statement = $pdo->prepare("SELECT  FROM monstres WHERE id = :id");
+// $statement->execute([
+//     ':id' => $id
+// ]);
+
+// var_dump($_GET);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -110,11 +125,11 @@ var_dump($_GET);
     <header>
         <div></div> <!-- Future place ptt logo -->
         <h1>Fais ton ciné</h1>
-        <div><a class="button" href="login.html">Login</a><a class="button" href="contact.html">Contact</a></div> <!-- Changer le lien -->
+        <div><a class="button" href="login.html">Login</a><a class="button" href="aide.php">Aide</a></div> <!-- Changer le lien -->
     </header>
     <main>
         <section>
-            <p><b>Filtrer par : </b></p>
+            <p style="color: whitesmoke; text-shadow: 1px 1px 1px #c80404;"><b>Filtrer par : </b></p>
             <button <?php echo $attributesTitle; ?>>Titre</button>
             <button <?php echo $attributesReal; ?>>Réalisateur</button>
             <button <?php echo $attributesCategory; ?>>Genre</button>
