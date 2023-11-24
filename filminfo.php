@@ -7,7 +7,7 @@ switch ($film) {
         $filmNom = "Film Action";
         $image = "<img src=\"img/placeholder.jpg\" alt=\"filmAction\">";
         break;
-    case "%27filmInformatique%27":
+    case "filmInformatique":
         $filmNom = "Film d'Informatique";
         $image = "<img src=\"img/placeholder.jpg\" alt=\"filmInformatique\">";
         break;
@@ -33,19 +33,17 @@ switch ($film) {
 <body>
     <header>
         <div></div> <!-- Future place ptt logo -->
-        <h1>Informations sur <?=$filmNom?></h1>
+        <h1>Détail de <?=$filmNom?></h1>
         <div><a class="button" href="login.html">Login</a><a  class="button" href="aide.php">Aide</a></div> <!-- Changer le lien -->
     </header>
     <main>
-        <section>
-            <?php
+        <?php
             if ($filmNom != null)
             {
-                echo "<h1>{$filmNom}</h1>";
-                echo $image;
-            }
-            ?>
-        </section>
+                echo "<h2>{$filmNom}</h2><div class=\"movieContainer\">\n";
+                echo "{$image}";
+                echo "</div>"; // ajouter les infos du films ici
+            }?>
     </main>
     <footer>
         <div>
