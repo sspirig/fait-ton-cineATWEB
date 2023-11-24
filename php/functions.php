@@ -93,9 +93,13 @@ function GetFilterAttributes($filter, $checked, $GET) : array {
 function GetFilms($filter, $record) : string {
     switch ($filter) {
         case 'title':
+            foreach($record as $key => $value)
+            {
+                
+            }
             $result = "<div> id=\"separatorDiv\">
             <img class=\"film\" src=\"img/placeholder.jpg\" alt=\"{$record[title]}\" onclick=\"window.document.location.href='filminfo.php?film={$record[title]}';\">
-            </div>";
+            <span class=\"txtimg\">{$record[title]}</span></div>";
             break;
         
         default:

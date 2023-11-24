@@ -15,6 +15,8 @@ switch ($film) {
         
         break;
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">

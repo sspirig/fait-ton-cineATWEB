@@ -34,7 +34,7 @@ $statement->execute(
 );
 
 $record = $statement->fetchAll(PDO::FETCH_ASSOC);
-
+var_dump($record);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -69,7 +69,7 @@ $record = $statement->fetchAll(PDO::FETCH_ASSOC);
         <article class="filmContainer">
             <?php //GetFilms($filter, $record); ?>
             <div id="separatorDiv">
-                <img class="film" src="img/placeholder.jpg" alt="placeholder" onclick="window.document.location.href='filminfo.php?film=filmAction';">
+                
                 <span class="txtimg">film Action</span>
             </div>
             <div id="separatorDiv">
