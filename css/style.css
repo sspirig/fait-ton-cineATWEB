@@ -8,7 +8,8 @@ main {
     flex-direction: column;
 }
 
-header, footer {
+header,
+footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,11 +25,11 @@ footer div {
 
 header h1 {
     text-shadow: 2px 5px 15px #6a0c0c;
-    font-size:3rem;
+    font-size: 3rem;
 }
 
 .whiteTxt {
-    color: #FFFEF7; 
+    color: #FFFEF7;
     text-shadow: 2px 2px 10px black;
 }
 
@@ -45,7 +46,7 @@ section {
     padding: 1rem;
 }
 
-.adminBar{
+.adminBar {
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -59,7 +60,7 @@ section {
     position: relative;
     align-items: center;
     text-align: center;
-    font-size:1.5rem;
+    font-size: 1.5rem;
     color: #c80404;
     text-shadow: 2px 5px 15px #6a0c0c;
     padding: 0.4rem;
@@ -73,11 +74,12 @@ section {
 }
 
 .film {
-    max-width: 350px; 
+    max-width: 350px;
     max-height: 494px;
     opacity: 100%;
     transition: 0.5s;
 }
+
 .film:hover {
     opacity: 30%;
     transition: 0.5s;
@@ -100,10 +102,11 @@ section {
 
 }
 
-a, .buttonLien {
+a,
+.buttonLien {
     color: whitesmoke;
     text-decoration: none;
-    padding: 17px 40px; 
+    padding: 17px 40px;
     border-radius: 50px;
     border: 0;
     background-color: rgb(13, 13, 13);
@@ -118,10 +121,10 @@ a, .buttonLien {
 .buttonPressed {
     color: whitesmoke;
     text-decoration: none;
-    padding: 17px 40px; 
+    padding: 17px 40px;
     border-radius: 50px;
     border: 0;
-    background-color:  hsl(352, 82%, 45%);
+    background-color: hsl(352, 82%, 45%);
     box-shadow: rgba(220, 216, 216, 0.05) 0 0 8px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -135,14 +138,17 @@ a, .buttonLien {
     box-shadow: rgb(163, 17, 39) 0px 2px 14px 0px;
 }
 
-.button:hover, .buttonLien:hover, .buttonPressed {
+.button:hover,
+.buttonLien:hover,
+.buttonPressed {
     background-color: hsl(0, 80%, 48%);
     color: hsl(0, 0%, 100%);
     box-shadow: rgb(220, 24, 53) 0px 7px 29px 0px;
 
 }
 
-a:active, .buttonLien:active {
+a:active,
+.buttonLien:active {
     background-color: hsl(352, 82%, 45%);
     color: hsl(0, 0%, 100%);
     box-shadow: rgb(220, 24, 24) 0px 0px 0px 0px;
@@ -172,7 +178,7 @@ form {
 
 label {
     color: #c80404;
-    text-shadow:1px 1px 2px #000000;
+    text-shadow: 1px 1px 2px #000000;
 }
 
 
@@ -184,27 +190,83 @@ label {
     justify-content: space-between;
 }
 
-.inputBtn{
+.inputBtn {
     display: flex;
     justify-content: center;
 }
 
-#divReponseEnvoi{
+#divReponseEnvoi {
     padding: 100px;
     color: #fefefe;
 }
 
+table {
+    color: #fefefe;
+}
 
-/* Ajustement pour augmenter l'espace entre les champs et les messages d'erreur */
-.inputDiv {
-    position: relative;
-    margin-bottom: 15px; /* Ajustez cette valeur selon votre préférence */
+
+section {
+    padding: 1rem;
+    height: auto;
+}
+
+table {
+    color: #fefefe;
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    /* Vous pouvez ajuster la valeur selon votre préférence */
+    overflow: hidden;
+}
+
+table,
+th,
+td {
+    border: 1px solid #c80404;
+}
+
+th,
+td {
+    padding: 0.5rem;
+    text-align: left;
+}
+
+
+th {
+    background-color: #fc0000;
+    color: #000000;
 }
 
 .error {
-    color: #ff008c;
-    position: absolute;
-    bottom: -10px; /* Ajustez cette valeur selon votre mise en page */
-    left: 0;
-    font-size: 14px;
+    color: blueviolet;
+}
+
+.inputDiv {
+    flex-direction: column;
+}
+
+
+.returnAide {
+    padding: 20px;
+    line-height: 1.5;
+    margin-top: 15vw;
+    margin-bottom: 15vw;
+    border: solid red 1px;
+    color: aliceblue;
+    background-color: #2a2a2a;
+    border-radius: 20px;
+    box-shadow: rgba(255, 0, 0, 0.377) 0px 5px 15px 0px;
+}
+
+#retourAcceuil {
+    all: initial;
+    font-size: 1.1rem;
+    color: red;
+    cursor: pointer;
+    text-align: center;
+    transition: color 0.5s;
+}
+
+#retourAcceuil:hover {
+    color: #6a0c0c;
 }

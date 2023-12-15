@@ -1,16 +1,16 @@
 <?php
-$username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_STRING);
-$email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
-$mdp = filter_input(INPUT_POST, "mdp", FILTER_SANITIZE_STRING);
-$text_error = null;
+// $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_STRING);
+// $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
+// $mdp = filter_input(INPUT_POST, "mdp", FILTER_SANITIZE_STRING);
+// $text_error = null;
 
-if ($mdp === "Super") {
-    $message = "Mot de passe correct. Bienvenue, $username !";
-    echo "<script>alert('$message');</script>";
-} else {
-    header("Location: index.html");
-    exit;
-}
+// if ($mdp === "Super") {
+//     $message = "Mot de passe correct. Bienvenue, $username !";
+//     echo "<script>alert('$message');</script>";
+// } else {
+//     header("Location: index.php");
+//     exit;
+// }
 
 // // Définissez ici la catégorie par défaut, par exemple 'acteur', 'film' ou 'pays'
 // $categorie = 'acteur';

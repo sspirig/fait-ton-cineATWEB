@@ -27,12 +27,7 @@ if (isset($_POST["submit"])) {
     }
 
     if (empty($errors)) {
-        $return = "Merci $name pour votre message sur $subject. <br> Nous vous contacterons sur l'email suivant : $email";
-    } else {
-        $return = "Veuillez remplir correctement tous les champs du formulaire.</br>";
-        foreach ($errors as $error) {
-            $return .= "- $error </br>";
-        }
+        $return = "Merci $name pour votre message sur $subject. <br> Nous vous contacterons sur l'email suivant : $email <br> <div> Retourner a <a href='index.php' id='retourAcceuil' >l'acceuil</a><div>";
     }
 }
 
@@ -60,49 +55,54 @@ if (isset($_POST["reset"])) {
         <div></div> <!-- Future place ptt logo -->
         <h1>Aide</h1>
         <div><a class="button" href="login.php">Login</a><a class="button" href="index.php">Accueil</a></div>
-        <!-- Changer le lien -->
     </header>
     <main class="flexForm">
-        <form action="aide.php" method="post">
-            <!-- Modification pour afficher les messages d'erreur -->
-            <div class="inputDiv">
-                <label for="name">Votre nom :</label>
-                <input type="text" name="name" id="name" class="input" class="inputAide" placeholder="nom"
-                    value="<?php echo htmlspecialchars($name); ?>">
-                <?php if (isset($errors['name'])) {
-                    echo '<span class="error">' . $errors['name'] . '</span>';
-                } ?>
-            </div>
-            <div class="inputDiv">
-                <label for="email">Votre e-mail :</label>
-                <input type="text" name="email" id="email" class="input" class="inputAide" placeholder="e-mail"
-                    value="<?php echo htmlspecialchars($email); ?>">
-                <?php if (isset($errors['email'])) {
-                    echo '<span class="error">' . $errors['email'] . '</span>';
-                } ?>
-            </div>
-            <div class="inputDiv">
-                <label for="subject">Sujet :</label>
-                <input type="text" name="subject" id="subject" class="input" class="inputAide" placeholder="sujet"
-                    value="<?php echo htmlspecialchars($subject); ?>">
-                <?php if (isset($errors['subject'])) {
-                    echo '<span class="error">' . $errors['subject'] . '</span>';
-                } ?>
-            </div>
-            <div class="inputDiv">
-                <label for="message">Votre message :</label>
-                <textarea name="message" id="message" class="input" class="inputAide" placeholder="message ici"
-                    cols="30" rows="10"><?php echo htmlspecialchars($message); ?></textarea>
-                <?php if (isset($errors['message'])) {
-                    echo '<span class="error">' . $errors['message'] . '</span>';
-                } ?>
-            </div>
+        <?php if ($return === null) { ?>
+            <form action="aide.php" method="post">
+                <!-- Modification pour afficher les messages d'erreur -->
+                <div class="inputDiv">
+                    <label for="name">Votre nom :</label>
+                    <input type="text" name="name" id="name" class="input" class="inputAide" placeholder="nom"
+                        value="<?php echo htmlspecialchars($name); ?>">
+                    <?php if (isset($errors['name'])) {
+                        echo '<span class="error">' . $errors['name'] . '</span>';
+                    } ?>
+                </div>
+                <div class="inputDiv">
+                    <label for="email">Votre e-mail :</label>
+                    <input type="text" name="email" id="email" class="input" class="inputAide" placeholder="email"
+                        value="<?php echo htmlspecialchars($email); ?>">
+                    <?php if (isset($errors['email'])) {
+                        echo '<span class="error">' . $errors['email'] . '</span>';
+                    } ?>
+                </div>
+                <div class="inputDiv">
+                    <label for="subject">Sujet :</label>
+                    <input type="text" name="subject" id="subject" class="input" class="inputAide" placeholder="sujet"
+                        value="<?php echo htmlspecialchars($subject); ?>">
+                    <?php if (isset($errors['subject'])) {
+                        echo '<span class="error">' . $errors['subject'] . '</span>';
+                    } ?>
+                </div>
+                <div class="inputDiv">
+                    <label for="message">Votre message :</label>
+                    <textarea name="message" id="message" class="input" class="inputAide" placeholder="message ici"
+                        cols="30" rows="10"><?php echo htmlspecialchars($message); ?></textarea>
+                    <?php if (isset($errors['message'])) {
+                        echo '<span class="error">' . $errors['message'] . '</span>';
+                    } ?>
+                </div>
 
-            <div class="inputBtn">
-                <input class="buttonLien" name="submit" type="submit" value="Envoyer">
-                <input class="buttonLien" name="reset" type="submit" value="Effacer">
-            </div>
-        </form>
+                <div class="inputBtn">
+                    <input class="buttonLien" name="submit" type="submit" value="Envoyer">
+                    <input class="buttonLien" name="reset" type="submit" value="Effacer">
+                </div>
+            </form>
+        <?php } else { ?>
+            <div class="returnAide">
+                <?php echo $return;
+        } ?>
+        </div>
     </main>
     <footer>
         <div>
