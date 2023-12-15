@@ -1,4 +1,5 @@
 <?php
+require_once "constante.php";
 
 function GetFilterAttributes($filter, $checked, $GET) : array {
     $array = [
@@ -90,20 +91,98 @@ function GetFilterAttributes($filter, $checked, $GET) : array {
     return $array;
 }
 
-function GetFilms($filter, $record) : string {
+function GetFilms($filter) : string {
+    $result = "";
     switch ($filter) {
         case 'title':
+
+            $sql = "SELECT titre FROM films ORDER BY titre";
+            $record = dbRun($sql)->fetchAll();
+
             foreach($record as $key => $value)
             {
-                
+                $imgName = GetImageName($record, $key);
+                if (strlen($record[$key]["titre"]) > 28)
+                {
+                    $record[$key]["titre"] = substr_replace($record[$key]["titre"], "...", 28);
+                }
+                $result .= "<div id=\"separatorDiv\">
+                <img class=\"film\" src=\"img/{$imgName}.jpg\" alt=\"".trim($record[$key]["titre"])."\" onclick=\"window.document.location.href='filminfo.php?film=".trim($record[$key]["titre"])."';\">
+                <span class=\"txtimg\">{$record[$key]["titre"]}</span></div>";
             }
-            $result = "<div> id=\"separatorDiv\">
-            <img class=\"film\" src=\"img/placeholder.jpg\" alt=\"{$record[title]}\" onclick=\"window.document.location.href='filminfo.php?film={$record[title]}';\">
-            <span class=\"txtimg\">{$record[title]}</span></div>";
-            break;
-        
+           
+            return $result;
+        case 'real':
+
+            $sql = "SELECT titre, idPersonne, idFilm FROM films ORDER BY idPersonne";
+            $record = dbRun($sql)->fetchAll();
+            $oldReal = null;
+
+            foreach($record as $key => $value)
+            {
+                // Si c'est un nouveau realisateur on rajoute une ligne avec son nom
+                if ($record[$key]["idPersonne"] !== $oldReal || $oldReal == null)
+                {
+                    $oldReal = $record[$key]["idPersonne"];
+                    $sql = "SELECT prenom, nom FROM personnes WHERE idPersonne = ( SELECT idPersonne FROM films WHERE idFilm = :id )";
+                    $param = ["id" => $record[$key]["idFilm"]];
+                    $real = dbRun($sql, $param)->fetch();
+                    $result .= "<br><h2 id=\"h2Real\">{$real["prenom"]} {$real["nom"]}</h2><br>";
+                    
+                }
+                $imgName = GetImageName($record, $key);
+                $result .= "<div id=\"separatorDiv\">
+                <img class=\"film\" src=\"img/{$imgName}.jpg\" alt=\"".trim($record[$key]["titre"])."\" onclick=\"window.document.location.href='filminfo.php?film=".trim($record[$key]["titre"])."';\">
+                <span class=\"txtimg\">{$record[$key]["titre"]}</span></div>";
+            }
+            
+            return $result;
         default:
             # code...
             break;
     }
+}
+
+function GetImageName($record, $key) : string {
+    switch (strtolower(trim($record[$key]["titre"]))) {    
+        case "terminator":
+            return "terminator";
+        default:
+            return "placeholder";
+    }
+}
+
+function db(): PDO
+{
+    static $pdo = null;
+
+    if ($pdo === null) {
+        $dsn = 'mysql:host=' . BDD_HOTE . ';dbname=' . BDD_NOM . ';charset=' . BDD_CHARSET;
+
+        $options = [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES => false,
+        ];
+
+        $pdo = new PDO($dsn, BDD_UTILISATEUR, BDD_MOT_DE_PASSE, $options);
+    }
+
+    return $pdo;
+}
+
+/**
+ * Connexion à une BD en utilisant PDO avec un pseudo singleton.
+ *
+ * @return PDO Un objet PDO
+ */
+function dbRun($sql, $param = null) {
+    // Préparer la requête SQL
+    $statement = db()->prepare($sql);
+
+    // Exécuter la requête.
+    $statement->execute($param);
+
+    // Retourne le PDOStatement pour lire les données dans le code appelant.
+    return $statement;
 }

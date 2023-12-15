@@ -18,23 +18,6 @@ $attributesActor = $attributes["actor"];
 $attributesLatest = $attributes["latest"];
 $attributesNewest = $attributes["newest"];
 
-// organisation
-$dsn = "mysql:host=localhost;dbname=cinema;charset=utf8";
-$opt = [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_EMULATE_PREPARES => false
-];
-
-$pdo = new PDO($dsn, "adminCinema", "Super", $opt);
-
-//$id = filter_input(INPUT_POST, "selectedId", FILTER_VALIDATE_INT);
-$statement = $pdo->prepare("SELECT * FROM cinema.films ORDER BY :filter");
-$statement->execute(
-    [ ":filter" => $filter ]
-);
-
-$record = $statement->fetchAll(PDO::FETCH_ASSOC);
-var_dump($record);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -42,7 +25,7 @@ var_dump($record);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Acceuil-fait ton ciné</title>
+    <title>Acceuil - fait ton ciné</title>
 </head>
 <!-- 
     Auteur : Yoan BMPS et Santiago SPRG
@@ -67,31 +50,7 @@ var_dump($record);
             <button <?php echo $attributesLatest; ?>>Anciennes sorties</button>
         </section>
         <article class="filmContainer">
-            <?php //GetFilms($filter, $record); ?>
-            <div id="separatorDiv">
-                
-                <span class="txtimg">film Action</span>
-            </div>
-            <div id="separatorDiv">
-                <img class="film" src="img/placeholder.jpg" alt="placeholder" onclick="window.document.location.href='filminfo.php?film=filmInformatique';">
-                <span class="txtimg">film Action</span>
-            </div>
-            <div id="separatorDiv">
-                <img class="film" src="img/placeholder.jpg" alt="placeholder" onclick="window.document.location.href='filminfo.php?film=filmAction';">
-                <span class="txtimg">film Action</span>
-            </div>
-            <div id="separatorDiv">
-                <img class="film" src="img/placeholder.jpg" alt="placeholder" onclick="window.document.location.href='filminfo.php?film=filmAction';">
-                <span class="txtimg">film Action</span>
-            </div>
-            <div id="separatorDiv">
-                <img class="film" src="img/placeholder.jpg" alt="placeholder" onclick="window.document.location.href='filminfo.php?film=filmAction';">
-                <span class="txtimg">film Action</span>
-            </div>
-            <div id="separatorDiv">
-                <img class="film" src="img/placeholder.jpg" alt="placeholder" onclick="window.document.location.href='filminfo.php?film=filmAction';">
-                <span class="txtimg">film Action</span>
-            </div>
+            <?php echo GetFilms($filter); ?>
         </article>
     </main>
     <footer>

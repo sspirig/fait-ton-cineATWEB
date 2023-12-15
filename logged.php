@@ -65,7 +65,7 @@
     ];
 
     $pdo = new PDO($dsn, "adminCinema", "Super", $opt);
-
+    
     //$id = filter_input(INPUT_POST, "selectedId", FILTER_VALIDATE_INT);
     $statement = $pdo->prepare("SELECT * FROM cinema.films");
     $statement->execute();
@@ -81,9 +81,9 @@
         // foreach ($ as $key => $value) {
         //     # code...
         // }
-        $tableauFilms[] = $value[$var];
+        $tableauFilms[] = $value;
     }
-    var_dump($tableauTitre);
+    var_dump($tableauFilms);
 
 ?>
 <!DOCTYPE html>
