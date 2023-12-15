@@ -1,91 +1,101 @@
 <?php
-    require_once "php/functions.php";
+$username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_STRING);
+$email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
+$mdp = filter_input(INPUT_POST, "mdp", FILTER_SANITIZE_STRING);
+$text_error = null;
 
-    $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_STRING);
-    $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
-    $mdp = filter_input(INPUT_POST, "mdp", FILTER_SANITIZE_STRING);
-    $text_error = null;
+if ($mdp === "Super") {
+    $message = "Mot de passe correct. Bienvenue, $username !";
+    echo "<script>alert('$message');</script>";
+} else {
+    header("Location: index.html");
+    exit;
+}
 
-    if ($mdp === "Super") {
-        $text_error = "Mot de passe correct. Bienvenue, $username !";
-    } else {
-        header("Location: index.php");
-        exit;
+// // Définissez ici la catégorie par défaut, par exemple 'acteur', 'film' ou 'pays'
+// $categorie = 'acteur';
+
+// // Définissez les liens pour chaque catégorie
+// $categories = ['acteur', 'film', 'pays'];
+// $liens = [];
+// foreach ($categories as $cat) {
+//     $liens[$cat] = "javascript:void(0);";
+// }
+
+// // Fonction pour générer un formulaire
+// function generateForm($type, $name) {
+//     echo "<form id='ajouter{$type}Form' style='display: none'>";
+//     echo "<div class='inputDiv'>";
+//     echo "<label for='{$name}{$type}'>Nom de {$type} :</label>";
+//     echo "<input type='text' id='{$name}{$type}' name='{$name}{$type}' class='input' required>";
+//     echo "</div>";
+//     echo "<div class='inputBtn'>";
+//     echo "<button class='buttonLien' type='submit'>Ajouter {$type}</button>";
+//     echo "</div>";
+//     echo "</form>";
+
+//     echo "<form id='modifier{$type}Form' style='display: none'>";
+//     echo "<div class='inputDiv'>";
+//     echo "<label for='{$name}{$type}Modif'>Nom de {$type} (Modification) :</label>";
+//     echo "<input type='text' id='{$name}{$type}Modif' name='{$name}{$type}Modif' class='input' required>";
+//     echo "</div>";
+//     echo "<div class='inputDiv'>";
+//     echo "<label for='{$name}{$type}Base'>Nom de {$type} (Base avant modif) :</label>";
+//     echo "<input type='text' id='{$name}{$type}Base' name='{$name}{$type}Base' class='input' required>";
+//     echo "</div>";
+//     echo "<div class='inputBtn'>";
+//     echo "<button class='buttonLien' type='submit'>Modifier {$type}</button>";
+//     echo "</div>";
+//     echo "</form>";
+
+//     echo "<form id='supprimer{$type}Form' style='display: none'>";
+//     echo "<div class='inputDiv'>";
+//     echo "<label for='{$name}{$type}Suppr'>Nom de {$type} à supprimer :</label>";
+//     echo "<input type='text' id='{$name}{$type}Suppr' name='{$name}{$type}Suppr' class='input' required>";
+//     echo "</div>";
+//     echo "<div class='inputBtn'>";
+//     echo "<button class='buttonLien' type='submit'>Supprimer {$type}</button>";
+//     echo "</div>";
+//     echo "</form>";
+// }
+
+$dsn = "mysql:host=localhost;dbname=cinema;charset=utf8";
+$opt = [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_EMULATE_PREPARES => false
+];
+
+$pdo = new PDO($dsn, "adminCinema", "Super", $opt);
+
+//$id = filter_input(INPUT_POST, "selectedId", FILTER_VALIDATE_INT);
+$statement = $pdo->prepare("SELECT * FROM cinema.films");
+$statement->execute();
+
+$record = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+$tableauFilms = [
+
+];
+
+function ShowResults($films)
+{
+    $answer = "<table border='1'><thead><tr><th>N° Film</th><th>Titre</th><th>Résumé</th><th>Année</th><th>Pays</th><th>Modifier</th><th>Supprimer</th></tr></thead><tbody>";
+    foreach ($films as $film) {
+        $idFilm = $film['idFilm'];
+        $answer .= "<tr>";
+        $answer .= "<td>{$film['idFilm']}</td>";
+        $answer .= "<td>{$film['titre']}</td>";
+        $answer .= "<td>{$film['resume']}</td>";
+        $answer .= "<td>{$film['annee']}</td>";
+        $answer .= "<td>{$film['idPays']}</td>";
+        $answer .= "<td><button onclick='modifierFilm($idFilm)'><img src='img/modifier.png'></button></td>";
+        $answer .= "<td><button onclick='supprimerFilm($idFilm)'><img src='img/poubelle.png'></button></td>";
+        $answer .= "</tr>";
     }
+    $answer .= "</tbody></table>";
+    return $answer;
+}
 
-    // Définissez ici la catégorie par défaut, par exemple 'acteur', 'film' ou 'pays'
-    $categorie = 'acteur';
-
-    // Définissez les liens pour chaque catégorie
-    $categories = ['acteur', 'film', 'pays'];
-    $liens = [];
-    foreach ($categories as $cat) {
-        $liens[$cat] = "javascript:void(0);";
-    }
-
-    // Fonction pour générer un formulaire
-    function generateForm($type, $name) {
-        echo "<form id='ajouter{$type}Form' style='display: none'>";
-        echo "<div class='inputDiv'>";
-        echo "<label for='{$name}{$type}'>Nom de {$type} :</label>";
-        echo "<input type='text' id='{$name}{$type}' name='{$name}{$type}' class='input' required>";
-        echo "</div>";
-        echo "<div class='inputBtn'>";
-        echo "<button class='buttonLien' type='submit'>Ajouter {$type}</button>";
-        echo "</div>";
-        echo "</form>";
-
-        echo "<form id='modifier{$type}Form' style='display: none'>";
-        echo "<div class='inputDiv'>";
-        echo "<label for='{$name}{$type}Modif'>Nom de {$type} (Modification) :</label>";
-        echo "<input type='text' id='{$name}{$type}Modif' name='{$name}{$type}Modif' class='input' required>";
-        echo "</div>";
-        echo "<div class='inputDiv'>";
-        echo "<label for='{$name}{$type}Base'>Nom de {$type} (Base avant modif) :</label>";
-        echo "<input type='text' id='{$name}{$type}Base' name='{$name}{$type}Base' class='input' required>";
-        echo "</div>";
-        echo "<div class='inputBtn'>";
-        echo "<button class='buttonLien' type='submit'>Modifier {$type}</button>";
-        echo "</div>";
-        echo "</form>";
-
-        echo "<form id='supprimer{$type}Form' style='display: none'>";
-        echo "<div class='inputDiv'>";
-        echo "<label for='{$name}{$type}Suppr'>Nom de {$type} à supprimer :</label>";
-        echo "<input type='text' id='{$name}{$type}Suppr' name='{$name}{$type}Suppr' class='input' required>";
-        echo "</div>";
-        echo "<div class='inputBtn'>";
-        echo "<button class='buttonLien' type='submit'>Supprimer {$type}</button>";
-        echo "</div>";
-        echo "</form>";
-    }
-
-    $dsn = "mysql:host=localhost;dbname=cinema;charset=utf8";
-    $opt = [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_EMULATE_PREPARES => false
-    ];
-
-    $pdo = new PDO($dsn, "adminCinema", "Super", $opt);
-
-    //$id = filter_input(INPUT_POST, "selectedId", FILTER_VALIDATE_INT);
-    $statement = $pdo->prepare("SELECT * FROM cinema.films");
-    $statement->execute();
-
-    $record = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-    $tableauFilms = [
-        
-    ];
-
-    //var_dump($record);
-    foreach ($record as $key => $value){
-        // foreach ($ as $key => $value) {
-        //     # code...
-        // }
-        $tableauFilms[] = $value[$var];
-    }
-    var_dump($tableauTitre);
 
 ?>
 <!DOCTYPE html>
@@ -96,79 +106,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <title>Script.php</title>
-    <script>
-        function toggleForm(formId) {
-            var form = document.getElementById(formId);
-
-            // Masquer le formulaire actuel si visible
-            if (form.style.display === 'block') {
-                form.style.display = 'none';
-            } else {
-                // Afficher le formulaire actuel
-                form.style.display = 'block';
-
-                // Masquer tous les autres formulaires
-                var allForms = document.querySelectorAll('form');
-                for (var i = 0; i < allForms.length; i++) {
-                    if (allForms[i].id !== formId) {
-                        allForms[i].style.display = 'none';
-                    }
-                }
-            }
-        }
-
-        function showActions(categorie) {
-            var categories = <?=json_encode($categories)?>;
-            for (var i = 0; i < categories.length; i++) {
-                var cat = categories[i];
-                document.getElementById(cat + 'Actions').style.display = cat === categorie ? 'block' : 'none';
-
-                // Masquer tous les formulaires lorsque vous cliquez sur une catégorie
-                var allForms = document.querySelectorAll('form');
-                for (var j = 0; j < allForms.length; j++) {
-                    allForms[j].style.display = 'none';
-                }
-            }
-        }
-    </script>
 </head>
 
 <body>
     <header>
         <div></div> <!-- Future place ptt logo -->
         <h1>Admin</h1>
-        <div><a class="button" href="index.php">Acceuil</a><a class="button" href="login.php">Login</a></div>
+        <div><a class="button" href="index.php">Acceuil</a><a class="button" href="login.html">Login</a></div>
     </header>
     <main>
         <nav>
             <div class="adminBar">
-                <?php
-                // Affichez les liens en fonction de la variable $liens
-                foreach ($categories as $cat) {
-                    echo "<a class='button' href='javascript:void(0);' onclick='showActions(\"$cat\")'>$cat</a>";
-                }                
-                ?>
             </div>
         </nav>
         <section>
             <?php
-                //foreach
+                echo ShowResults($record);
             ?>
         </section>
         <article class="flexForm">
             <?php
-            // Affichez les formulaires et boutons pour chaque catégorie
-            foreach ($categories as $cat) {
-                echo "<div id='{$cat}Actions' style='display: none'>";
-                echo "<h2 class=\"whiteTxt\">$cat</h2>";
-                echo "<button class='buttonLien' onclick=\"toggleForm('ajouter{$cat}Form')\">Ajouter</button>";
-                echo "<button class='buttonLien' onclick=\"toggleForm('modifier{$cat}Form')\">Modifier</button>";
-                echo "<button class='buttonLien' onclick=\"toggleForm('supprimer{$cat}Form')\">Supprimer</button>";
-                echo "</div>";
-
-                // Utilisez la fonction generateForm pour générer les formulaires
-                generateForm($cat, 'nom');
-            }
             ?>
         </article>
     </main>
@@ -179,6 +136,7 @@
             Atelier: Web <br>
         </div>
     </footer>
+    <script src="srcript.js"></script>
 </body>
 
 </html>
