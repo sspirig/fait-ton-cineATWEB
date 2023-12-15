@@ -1,4 +1,6 @@
 <?php
+    require_once "php/functions.php";
+
     $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_STRING);
     $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
     $mdp = filter_input(INPUT_POST, "mdp", FILTER_SANITIZE_STRING);
@@ -7,7 +9,7 @@
     if ($mdp === "Super") {
         $text_error = "Mot de passe correct. Bienvenue, $username !";
     } else {
-        header("Location: index.html");
+        header("Location: index.php");
         exit;
     }
 
@@ -135,7 +137,7 @@
     <header>
         <div></div> <!-- Future place ptt logo -->
         <h1>Admin</h1>
-        <div><a class="button" href="index.php">Acceuil</a><a class="button" href="login.html">Login</a></div>
+        <div><a class="button" href="index.php">Acceuil</a><a class="button" href="login.php">Login</a></div>
     </header>
     <main>
         <nav>

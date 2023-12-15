@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,11 +14,13 @@
     Date : 29.09.2023  
     Version : v1
  -->
+
 <body>
     <header>
         <div></div> <!-- Future place ptt logo -->
         <h1>Login</h1>
-        <div><a class="button" href="index.php">Acceuil</a><a class="button" href="aide.php">Aide</a></div> <!-- Changer le lien -->
+        <div><a class="button" href="index.php">Accueil</a><a class="button" href="aide.php">Aide</a></div>
+        <!-- Changer le lien -->
     </header>
     <main class="flexForm">
         <form action="logged.php" method="post">
@@ -35,15 +38,18 @@
             </div>
             <div class="inputBtn">
                 <button class="buttonLien" type="submit">Connexion</button>
+                <button class="buttonLien" type="reset">Effacer</button>
             </div>
         </form>
     </main>
+    </div>
     <footer>
         <div>
-            Auteur : Yoan BMPS & Santiago SPRG <br> 
+            Auteur : Yoan BMPS & Santiago SPRG <br>
             Projet : fais ton ciné <br>
             Atelier: Web <br>
         </div>
     </footer>
 </body>
+
 </html>

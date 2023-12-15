@@ -193,3 +193,18 @@ label {
     padding: 100px;
     color: #fefefe;
 }
+
+
+/* Ajustement pour augmenter l'espace entre les champs et les messages d'erreur */
+.inputDiv {
+    position: relative;
+    margin-bottom: 15px; /* Ajustez cette valeur selon votre préférence */
+}
+
+.error {
+    color: #ff008c;
+    position: absolute;
+    bottom: -10px; /* Ajustez cette valeur selon votre mise en page */
+    left: 0;
+    font-size: 14px;
+}

@@ -113,7 +113,7 @@ if (array_key_exists("filter",$_GET))
     <header>
         <div></div> <!-- Future place ptt logo -->
         <h1>Fais ton ciné</h1>
-        <div><a class="button" href="login.html">Login</a><a class="button" href="aide.php">Aide</a></div> <!-- Changer le lien -->
+        <div><a class="button" href="login.php">Login</a><a class="button" href="aide.php">Aide</a></div> <!-- Changer le lien -->
     </header>
     <main>
         <section>
