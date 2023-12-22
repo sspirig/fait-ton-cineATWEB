@@ -8,6 +8,10 @@ $attributesActor = "";
 $attributesLatest = "";
 $attributesNewest = "";
 $filter = filter_input(INPUT_GET, "filter", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+if ($filter === null)
+{
+    $filter = "title";
+}
 $checked = filter_input(INPUT_GET, "checked", FILTER_VALIDATE_BOOL);
 $attributes = GetFilterAttributes($filter, $checked, $_GET);
 
@@ -49,7 +53,7 @@ $attributesNewest = $attributes["newest"];
             <button <?php echo $attributesNewest; ?>>Dernières sorties</button>
             <button <?php echo $attributesLatest; ?>>Anciennes sorties</button>
         </section>
-        <article class="filmContainer">
+        <article id="filmContainer">
             <?php echo GetFilms($filter); ?>
         </article>
     </main>

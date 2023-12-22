@@ -1,6 +1,32 @@
 <?php
 require_once "constante.php";
 
+function GetFilmInfo($film) {
+    $response = [];
+    $sql = "SELECT titre, annee, idPersonne, genres.nom, resume, idPays FROM films WHERE titre = ? AND genres.nom = ( SELECT nom FROM genres WHERE idGenre = films.idGenre )";
+    $param = [$film];
+    $record = dbRun($sql)->fetch();
+
+
+    switch ($film) {
+        case "":
+            $response["nom"] = "Film Action";
+            $response["image"] = "<img src=\"img/placeholder.jpg\" alt=\"filmAction\">";
+            $response["annee"] = $record["annee"];
+            $response["real"] = $record["idPersonne"];
+            $response["annee"] = $record[""];
+            break;
+        case "filmInformatique":
+            $response["nom"] = "Film d'Informatique";
+            $response["image"] = "<img src=\"img/placeholder.jpg\" alt=\"filmInformatique\">";
+            $response["annee"] = $record["annee"];
+            break;
+        default:
+            
+            break;
+    }
+}
+
 function GetFilterAttributes($filter, $checked, $GET) : array {
     $array = [
         "title" => "",
@@ -107,7 +133,7 @@ function GetFilms($filter) : string {
                     $record[$key]["titre"] = substr_replace($record[$key]["titre"], "...", 28);
                 }
                 $result .= "<div id=\"separatorDiv\">
-                <img class=\"film\" src=\"img/{$imgName}.jpg\" alt=\"".trim($record[$key]["titre"])."\" onclick=\"window.document.location.href='filminfo.php?film=".trim($record[$key]["titre"])."';\">
+                <img class=\"film\" src=\"img/{$imgName}.jpg\" alt=\"".trim($record[$key]["titre"])."\" onclick=\"window.document.location.href='filminfo.php?film=".strtolower(trim($record[$key]["titre"]))."';\">
                 <span class=\"txtimg\">{$record[$key]["titre"]}</span></div>";
             }
            
@@ -127,12 +153,37 @@ function GetFilms($filter) : string {
                     $sql = "SELECT prenom, nom FROM personnes WHERE idPersonne = ( SELECT idPersonne FROM films WHERE idFilm = :id )";
                     $param = ["id" => $record[$key]["idFilm"]];
                     $real = dbRun($sql, $param)->fetch();
-                    $result .= "<br><h2 id=\"h2Real\">{$real["prenom"]} {$real["nom"]}</h2><br>";
+                    $result .= "<div id=\"breakDiv\"><h2 id=\"h2Real\">{$real["prenom"]} {$real["nom"]}</h2></div>";
                     
                 }
                 $imgName = GetImageName($record, $key);
                 $result .= "<div id=\"separatorDiv\">
-                <img class=\"film\" src=\"img/{$imgName}.jpg\" alt=\"".trim($record[$key]["titre"])."\" onclick=\"window.document.location.href='filminfo.php?film=".trim($record[$key]["titre"])."';\">
+                <img class=\"film\" src=\"img/".$imgName.".jpg\" alt=\"".trim($record[$key]["titre"])."\" onclick=\"window.document.location.href='filminfo.php?film=".trim($record[$key]["titre"])."';\">
+                <span class=\"txtimg\">{$record[$key]["titre"]}</span></div>";
+            }
+            
+            return $result;
+        case 'genre':
+
+            $sql = "SELECT titre, idPersonne, idFilm, genres.nom FROM films, genres ORDER BY genres.nom";
+            $record = dbRun($sql)->fetchAll();
+            $oldReal = null;
+
+            foreach($record as $key => $value)
+            {
+                // Si c'est un nouveau realisateur on rajoute une ligne avec son nom
+                if ($record[$key]["idPersonne"] !== $oldReal || $oldReal == null)
+                {
+                    $oldReal = $record[$key]["idPersonne"];
+                    $sql = "SELECT prenom, nom FROM personnes WHERE idPersonne = ( SELECT idPersonne FROM films WHERE idFilm = :id )";
+                    $param = ["id" => $record[$key]["idFilm"]];
+                    $real = dbRun($sql, $param)->fetch();
+                    $result .= "<div id=\"breakDiv\"><h2 id=\"h2Real\">{$record}</h2></div>";
+                    
+                }
+                $imgName = GetImageName($record, $key);
+                $result .= "<div id=\"separatorDiv\">
+                <img class=\"film\" src=\"img/".$imgName.".jpg\" alt=\"".trim($record[$key]["titre"])."\" onclick=\"window.document.location.href='filminfo.php?film=".trim($record[$key]["titre"])."';\">
                 <span class=\"txtimg\">{$record[$key]["titre"]}</span></div>";
             }
             
@@ -144,9 +195,20 @@ function GetFilms($filter) : string {
 }
 
 function GetImageName($record, $key) : string {
+    //var_dump(strtolower(trim($record[$key]["titre"])));
     switch (strtolower(trim($record[$key]["titre"]))) {    
         case "terminator":
             return "terminator";
+        case "alien":
+            return "alien";
+        case "psychose":
+            return "psychose";
+        case "le parrain":
+            return "leParrain";
+        case "le parrain ii":
+            return "leParrainii";
+        case "le parrain iii":
+            return "leParrainiii";
         default:
             return "placeholder";
     }

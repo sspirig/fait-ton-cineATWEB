@@ -2,19 +2,7 @@
 $filmNom = "";
 $image = "";
 $film = filter_input(INPUT_GET, "film", FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-switch ($film) {
-    case "%27filmAction%27":
-        $filmNom = "Film Action";
-        $image = "<img src=\"img/placeholder.jpg\" alt=\"filmAction\">";
-        break;
-    case "filmInformatique":
-        $filmNom = "Film d'Informatique";
-        $image = "<img src=\"img/placeholder.jpg\" alt=\"filmInformatique\">";
-        break;
-    default:
-        
-        break;
-}
+
 
 
 ?>
