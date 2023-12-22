@@ -1,8 +1,5 @@
 <?php
-    require_once "constant.php";
-    require_once "fonction.php";
-
-
+    require_once "fonctions.php";
 
     /**
      * Retourne 10 Films 

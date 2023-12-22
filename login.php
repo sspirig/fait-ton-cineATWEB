@@ -1,7 +1,7 @@
 <?php
 require_once "php/functions.php";
 
-$user = filter_input(INPUT_POST, 'user', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$user = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
 $pwd = filter_input(INPUT_POST, 'pwd', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
@@ -9,7 +9,7 @@ $errors = array(); // tableau pour stocker les messages d'erreur
 
 if (isset($_POST["submit"])) {
     if (!Verification3Lettre($user)) {
-        $errors['user'] = "Le nom doit avoir au moins 3 caractères.";
+        $errors['username'] = "Le nom doit avoir au moins 3 caractères.";
     }
 
     if (!VerificationEmail($email)) {
@@ -64,7 +64,7 @@ if (isset($_POST["reset"])) {
             <div class="inputDiv">
                 <label for="username">Utilisateur :</label>
                 <input type="text" name="username" id="username" class="input" placeholder="nom d'utilisateur"
-                    value="<?php echo htmlspecialchars($user); ?>">
+                    value="<?= $user ?>">
                 <?php if (isset($errors['user'])) {
                     echo '<span class="error">' . $errors['user'] . '</span>';
                 } ?>
@@ -72,15 +72,15 @@ if (isset($_POST["reset"])) {
             <div class="inputDiv">
                 <label for="email">Email :</label>
                 <input type="email" name="email" id="email" class="input" placeholder="email"
-                    value="<?php echo htmlspecialchars($email); ?>">
+                    value="<?=$email ?>">
                 <?php if (isset($errors['email'])) {
                     echo '<span class="error">' . $errors['email'] . '</span>';
                 } ?>
             </div>
             <div class="inputDiv">
-                <label for="mdp">Mot de passe :</label>
-                <input type="password" name="mdp" id="mdp" class="input" placeholder="mot de passe"
-                    value="<?php echo htmlspecialchars($pwd); ?>">
+                <label for="pwd">Mot de passe :</label>
+                <input type="password" name="pwd" id="pwd" class="input" placeholder="mot de passe"
+                    value="<?= $pwd ?>">
                 <?php if (isset($errors['pwd'])) {
                     echo '<span class="error">' . $errors['pwd'] . '</span>';
                 } ?>

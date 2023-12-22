@@ -262,6 +262,7 @@ th {
     all: initial;
     font-size: 1.1rem;
     color: red;
+    
     cursor: pointer;
     text-align: center;
     transition: color 0.5s;
