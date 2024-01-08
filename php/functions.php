@@ -163,23 +163,19 @@ function GetFilms($filter) : string {
             }
             
             return $result;
-        case 'genre':
+        case 'category':
 
-            $sql = "SELECT titre, idPersonne, idFilm, genres.nom FROM films, genres ORDER BY genres.nom";
+            $sql = "SELECT DISTINCT f.titre, idFilm, Genre FROM films AS f, genres ORDER BY Genre ";
             $record = dbRun($sql)->fetchAll();
-            $oldReal = null;
+            $oldGender = -1;
 
             foreach($record as $key => $value)
             {
-                // Si c'est un nouveau realisateur on rajoute une ligne avec son nom
-                if ($record[$key]["idPersonne"] !== $oldReal || $oldReal == null)
+                if ($record[$key]["Genre"] !== $oldGender || $oldGender == -1) // Si c'est un nouveau realisateur on rajoute une ligne avec son nom
                 {
-                    $oldReal = $record[$key]["idPersonne"];
-                    $sql = "SELECT prenom, nom FROM personnes WHERE idPersonne = ( SELECT idPersonne FROM films WHERE idFilm = :id )";
-                    $param = ["id" => $record[$key]["idFilm"]];
-                    $real = dbRun($sql, $param)->fetch();
-                    $result .= "<div id=\"breakDiv\"><h2 id=\"h2Real\">{$record}</h2></div>";
-                    
+                    $oldGender = $record[$key]["Genre"];
+                    $result .= "<div id=\"breakDiv\"><h2 id=\"h2Real\">{$record[$key]["Genre"]}</h2></div>";
+
                 }
                 $imgName = GetImageName($record, $key);
                 $result .= "<div id=\"separatorDiv\">
