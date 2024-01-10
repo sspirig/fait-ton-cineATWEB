@@ -1,14 +1,8 @@
 <?php
-$dsn = "mysql:host=localhost;dbname=cinema;charset=utf8";
-$opt = [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_EMULATE_PREPARES => false
-];
-
-$pdo = new PDO($dsn, "adminCinema", "Super", $opt);
+require_once "php/functions.php";
 
 //$id = filter_input(INPUT_POST, "selectedId", FILTER_VALIDATE_INT);
-$statement = $pdo->prepare("SELECT * FROM cinema.films");
+$statement = connexionBdd()->prepare("SELECT * FROM cinema.films");
 $statement->execute();
 
 $record = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -52,7 +46,7 @@ function ShowResults($films)
     <header>
         <div></div> <!-- Future place ptt logo -->
         <h1>Admin</h1>
-        <div><a class="button" href="index.php">Acceuil</a><a class="button" href="login.html">Login</a></div>
+        <div><a class="button" href="index.php">Acceuil</a><a class="button" href="login.php">Login</a></div>
     </header>
     <main>
         <nav>

@@ -65,8 +65,8 @@ if (isset($_POST["reset"])) {
                 <label for="username">Utilisateur :</label>
                 <input type="text" name="username" id="username" class="input" placeholder="nom d'utilisateur"
                     value="<?= $user ?>">
-                <?php if (isset($errors['user'])) {
-                    echo '<span class="error">' . $errors['user'] . '</span>';
+                <?php if (isset($errors['username'])) {
+                    echo '<span class="error">' . $errors['username'] . '</span>';
                 } ?>
             </div>
             <div class="inputDiv">

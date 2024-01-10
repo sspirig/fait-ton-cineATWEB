@@ -1,24 +1,6 @@
 <?php
-    require_once "fonctions.php";
-
-    /**
-     * Retourne 10 Films 
-     * 
-     * @return array Un tableau de Films
-     */
-    function selectionnerTousLesFilms(): array
-    {
-        // Préparer la requête (SELECT id, author, title, pub_year, genre_id FROM books LIMIT 10;)
-        $query = "SELECT id, author, title, pub_year, genre_id FROM books LIMIT 10";
-        $statement = connexionBdd()->prepare($query);
-
-        // Exécuter la requête
-        $statement->execute();
-
-        // Lire tous les enregistrements
-        return $statement->fetchAll();
-    }
-
+    require_once "functions.php";
+    
     /**
      * Insère un Film dans la base
      * 
@@ -31,15 +13,18 @@
     function insererFilm(array $Film): bool
     {
         // Préparer la requête (INSERT INTO books (author, title, pub_year, genre_id) VALUES (<AUTEUR>, <TITRE>, <ANNÉE-PUB>, <ID DU GENRE>);)
-        $query = "INSERT INTO books (author, title, pub_year, genre_id) VALUES (:auteur, :titre, :anneePub, :genreId)";
+        $query = "INSERT INTO films (auteur, title, annee, idPersonne, idGenre, resume, idPays) VALUES (:auteur, :title, :annee, :idPersonne, :idGenre, :resume, :idPays)";
         $statement = connexionBdd()->prepare($query);
     
         // Exécuter la requête
         $succes = $statement->execute([
             ':auteur' => $Film['auteur'],
             ':titre' => $Film['titre'],
-            ':anneePub' => $Film['anneePub'],
-            ':genreId' => $Film['genreId'],
+            ':annee' => $Film['annee'],
+            ':idPersonne' => $Film['idPersonne'],
+            ':idGenre' => $Film['idGenre'],
+            ':resume' => $Film['resume'],
+            ':idPays' => $Film['idPays'],
         ]);
 
         return $succes;
@@ -61,17 +46,19 @@
 	    $pdo = connexionBdd();
 
 	    // Préparer la requête
-        $sql = "UPDATE books SET author = :auteur, title = :titre, pub_year = :publication, genre_id = :genre WHERE id = :id";
+        $sql = "UPDATE films SET titre = :titre, annee = :annee, idPersonne = :idPersonne, idGenre = :idGenre, resume = :resume, idPays = :idPays WHERE idFilm = :idFilm";
 
         $statement = $pdo->prepare($sql);
 
         // Exécuter la requête
         $statement->execute([
-            ':id' => $Film['id'],
-            ':auteur' => $Film['auteur'],
+            ':idFilm' => $Film['idFilm'],
             ':titre' => $Film['titre'],
-            ':publication' => $Film['anneePub'],
-            ':genre' => $Film['genreId'],
+            ':annee' => $Film['annee'],
+            ':idPersonne' => $Film['idPersonne'],
+            ':idGenre' => $Film['idGenre'],
+            ':resume' => $Film['resume'],
+            ':idPays' => $Film['idPays'],
         ]);
     }
 
@@ -87,12 +74,12 @@
 	    $pdo = connexionBdd();
 
 	    // Préparer la requête
-        $sql = 'DELETE FROM books WHERE id = :id';
+        $sql = 'DELETE FROM films WHERE idFilm = :idFilm';
 
         $statement = $pdo->prepare($sql);
 
         // Exécuter la requête, passe l'ID saisi par l'utilisateur
         $statement->execute([
-            ':id' => $id
+            ':idFilm' => $id
         ]);
     }
