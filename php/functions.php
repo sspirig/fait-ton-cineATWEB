@@ -157,12 +157,16 @@ function GetFilms($filter) : string {
                     
                 }
                 $imgName = GetImageName($record, $key);
+                if (strlen($record[$key]["titre"]) > 28)
+                {
+                    $record[$key]["titre"] = substr_replace($record[$key]["titre"], "...", 28);
+                }
                 $result .= "<div id=\"separatorDiv\">
                 <img class=\"film\" src=\"img/".$imgName.".jpg\" alt=\"".trim($record[$key]["titre"])."\" onclick=\"window.document.location.href='filminfo.php?film=".trim($record[$key]["titre"])."';\">
                 <span class=\"txtimg\">{$record[$key]["titre"]}</span></div>";
             }
             
-            return $result;
+            return $result; 
         case 'category':
 
             $sql = "SELECT DISTINCT f.titre, idFilm, Genre FROM films AS f, genres ORDER BY Genre ";
@@ -171,13 +175,16 @@ function GetFilms($filter) : string {
 
             foreach($record as $key => $value)
             {
-                if ($record[$key]["Genre"] !== $oldGender || $oldGender == -1) // Si c'est un nouveau realisateur on rajoute une ligne avec son nom
+                if ($record[$key]["Genre"] !== $oldGender || $oldGender == -1) // Si c'est un nouveau genre on rajoute une ligne avec son nom
                 {
                     $oldGender = $record[$key]["Genre"];
                     $result .= "<div id=\"breakDiv\"><h2 id=\"h2Real\">{$record[$key]["Genre"]}</h2></div>";
-
                 }
                 $imgName = GetImageName($record, $key);
+                if (strlen($record[$key]["titre"]) > 28)
+                {
+                    $record[$key]["titre"] = substr_replace($record[$key]["titre"], "...", 28);
+                }
                 $result .= "<div id=\"separatorDiv\">
                 <img class=\"film\" src=\"img/".$imgName.".jpg\" alt=\"".trim($record[$key]["titre"])."\" onclick=\"window.document.location.href='filminfo.php?film=".trim($record[$key]["titre"])."';\">
                 <span class=\"txtimg\">{$record[$key]["titre"]}</span></div>";
