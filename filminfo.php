@@ -2,19 +2,9 @@
 $filmNom = "";
 $image = "";
 $film = filter_input(INPUT_GET, "film", FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-switch ($film) {
-    case "%27filmAction%27":
-        $filmNom = "Film Action";
-        $image = "<img src=\"img/placeholder.jpg\" alt=\"filmAction\">";
-        break;
-    case "%27filmInformatique%27":
-        $filmNom = "Film d'Informatique";
-        $image = "<img src=\"img/placeholder.jpg\" alt=\"filmInformatique\">";
-        break;
-    default:
-        
-        break;
-}
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -33,19 +23,17 @@ switch ($film) {
 <body>
     <header>
         <div></div> <!-- Future place ptt logo -->
-        <h1>Informations sur <?=$filmNom?></h1>
-        <div><a class="button" href="login.php">Login</a><a  class="button" href="aide.php">Aide</a></div> <!-- Changer le lien -->
+        <h1>Détail de <?=$filmNom?></h1>
+        <div><a class="button" href="login.html">Login</a><a  class="button" href="aide.php">Aide</a></div> <!-- Changer le lien -->
     </header>
     <main>
-        <section>
-            <?php
+        <?php
             if ($filmNom != null)
             {
-                echo "<h1>{$filmNom}</h1>";
-                echo $image;
-            }
-            ?>
-        </section>
+                echo "<h2>{$filmNom}</h2><div class=\"movieContainer\">\n";
+                echo "{$image}";
+                echo "</div>"; // ajouter les infos du films ici
+            }?>
     </main>
     <footer>
         <div>
