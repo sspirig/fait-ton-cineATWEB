@@ -50,8 +50,6 @@ $attributesNewest = $attributes["newest"];
             <button <?php echo $attributesReal; ?>>Réalisateur</button>
             <button <?php echo $attributesCategory; ?>>Genre</button>
             <button <?php echo $attributesActor; ?>>Acteur</button>
-            <button <?php echo $attributesNewest; ?>>Dernières sorties</button>
-            <button <?php echo $attributesLatest; ?>>Anciennes sorties</button>
         </section>
         <article id="filmContainer">
             <?php echo GetFilms($filter); ?>

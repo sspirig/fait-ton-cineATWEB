@@ -211,6 +211,24 @@ function GetFilms($filter) : string {
             }
             
             return $result;
+        case 'latest':
+
+            $sql = "SELECT titre FROM films ORDER BY titre";
+            $record = dbRun($sql)->fetchAll();
+
+            foreach($record as $key => $value)
+            {
+                $imgName = GetImageName($record, $key);
+                if (strlen($record[$key]["titre"]) > 28)
+                {
+                    $record[$key]["titre"] = substr_replace($record[$key]["titre"], "...", 28);
+                }
+                $result .= "<div id=\"separatorDiv\">
+                <img class=\"film\" src=\"img/{$imgName}.jpg\" alt=\"".trim($record[$key]["titre"])."\" onclick=\"window.document.location.href='filminfo.php?film=".strtolower(trim($record[$key]["titre"]))."';\">
+                <span class=\"txtimg\">{$record[$key]["titre"]}</span></div>";
+            }
+           
+            return $result;
         default:
             # code...
             break;
