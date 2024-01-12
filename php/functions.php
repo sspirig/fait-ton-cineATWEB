@@ -36,8 +36,8 @@ function GetFilmInfo($film) {
     $idFilmRecord = dbRun($sql, $param)->fetch();
     $idFilm = $idFilmRecord["idFilm"];
 
-    $sql = "SELECT titre, annee, personnes.idPersonne, Genre, resume, idPays FROM films, personnes, genres WHERE films.idFilm = :id AND personnes.idPersonne = ( SELECT films.idPersonne FROM films WHERE films.idFilm = :id ) AND genres.idGenre = ( SELECT nom FROM genres WHERE idGenre = films.idGenre )";
-    $param = [":id" =>$idFilm];
+    $sql = "SELECT titre, annee, personnes.idPersonne, Genre, resume, idPays FROM films, personnes, genres WHERE films.idFilm = ? AND personnes.idPersonne = ( SELECT films.idPersonne FROM films WHERE films.idFilm = ? ) AND genres.idGenre = ( SELECT nom FROM genres WHERE idGenre = films.idGenre )";
+    $param = ["?" =>$idFilm];
     $record = dbRun($sql, $param)->fetch();
     if ($record !== false)
     {

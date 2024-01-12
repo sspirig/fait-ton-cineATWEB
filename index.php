@@ -52,7 +52,7 @@ $attributesNewest = $attributes["newest"];
             <button <?php echo $attributesActor; ?>>Acteur</button>
         </section>
         <article id="filmContainer">
-            <?php echo GetFilms($filter); ?>
+            <?php if ($checked) {echo GetFilms($filter);} ?>
         </article>
     </main>
     <footer>
