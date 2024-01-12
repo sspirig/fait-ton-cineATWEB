@@ -12,7 +12,7 @@ $idFilm = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Modifer un film</title>
+    <title>Ajouter un film</title>
 </head>
 <!-- 
     Auteur : Yoan BMPS et Santiago SPRG
@@ -25,18 +25,12 @@ $idFilm = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 <body>
     <header>
         <div></div> <!-- Future place ptt logo -->
-        <h1>Modifier Film</h1>
+        <h1>Ajouter film</h1>
         <div><a class="button" href="index.php">Accueil</a><a class="button" href="logged.php">logged.php</a></div>
         <!-- Changer le lien -->
     </header>
     <main class="flexForm">
-    <form action="modifierFilm.php" method="post">
-        <div class="inputDiv">
-            <label for="idFilm">ID du Film :</label>
-            <input type="text" name="idFilm" id="idFilm" class="input" placeholder="ID du film"
-                value="">
-        </div>
-
+    <form action="ajouterFilm.php" method="post">
         <div class="inputDiv">
             <label for="titre">Titre :</label>
             <input type="text" name="titre" id="titre" class="input" placeholder="Titre du film"

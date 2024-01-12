@@ -29,8 +29,6 @@ function ShowResults($films)
     $answer .= "</tbody></table>";
     return $answer;
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -55,13 +53,10 @@ function ShowResults($films)
         </nav>
         <section>
             <?php
-                echo ShowResults($record);
+            echo ShowResults($record);
             ?>
+            <a class="button" href="ajouterFormulaireFilm.php">Ajouter un film<img src='img/ajouter.png'></a>
         </section>
-        <article class="flexForm">
-            <?php
-            ?>
-        </article>
     </main>
     <footer>
         <div>
