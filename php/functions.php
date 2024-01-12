@@ -22,29 +22,37 @@ function connexionBdd(): PDO
 
 
 function GetFilmInfo($film) {
-    $response = [];
-    $sql = "SELECT titre, annee, idPersonne, genres.nom, resume, idPays FROM films WHERE titre = ? AND genres.nom = ( SELECT nom FROM genres WHERE idGenre = films.idGenre )";
-    $param = [$film];
-    $record = dbRun($sql)->fetch();
+    $response = [
+        "image" => "",
+        "title" => "",
+        "annee" => "",
+        "real" => "",
+        "nomGenre" => "",
+        "pays" => "",
+        "resume" => "",
+    ];
+    $sql = "SELECT idFilm FROM films WHERE titre = :titre";
+    $param = [":titre" =>$film];
+    $idFilmRecord = dbRun($sql, $param)->fetch();
+    $idFilm = $idFilmRecord["idFilm"];
 
-
-    switch ($film) {
-        case "":
-            $response["nom"] = "Film Action";
-            $response["image"] = "<img src=\"img/placeholder.jpg\" alt=\"filmAction\">";
-            $response["annee"] = $record["annee"];
-            $response["real"] = $record["idPersonne"];
-            $response["annee"] = $record[""];
-            break;
-        case "filmInformatique":
-            $response["nom"] = "Film d'Informatique";
-            $response["image"] = "<img src=\"img/placeholder.jpg\" alt=\"filmInformatique\">";
-            $response["annee"] = $record["annee"];
-            break;
-        default:
-            
-            break;
+    $sql = "SELECT titre, annee, personnes.idPersonne, Genre, resume, idPays FROM films, personnes, genres WHERE films.idFilm = :id AND personnes.idPersonne = ( SELECT films.idPersonne FROM films WHERE films.idFilm = :id ) AND genres.idGenre = ( SELECT nom FROM genres WHERE idGenre = films.idGenre )";
+    $param = [":id" =>$idFilm];
+    $record = dbRun($sql, $param)->fetch();
+    if ($record !== false)
+    {
+        foreach ($record as $key => $value) {
+            $imgName = GetImageName($record, $key);
+            $response["title"] .= "<div id=\"breakDiv\"><h3 id=\"h2Real\">{$record[$key]["titre"]}</h2></div>";
+            $response["film"] .= "<img class=\"film\" src=\"img/{$imgName}.jpg\" alt=\"".trim($record[$key]["titre"])."\" onclick=\"window.document.location.href='filminfo.php?film=".strtolower(trim($record[$key]["titre"]))."';\">";
+            $response["annee"] = "<h4> Année: ".$record[$key]["annee"]."</h4>";
+            $response["real"] = "<h4> Réalisateur: ".$record[$key]["real"]."</h4>";
+            $response["nomGenre"] = "<h4> Genre: ".$record[$key]["genreNom"]."</h4>";
+            $response["resume"] = "<h4> Résumé: </h4><br><p>".$record[$key]["resume"]."</p>";
+            $response["pays"] = "<h4> Pays: ".$record[$key]["pays"]."</h4>";
+        }
     }
+    return $response;
 }
 
 function GetFilterAttributes($filter, $checked, $GET) : array {
@@ -211,23 +219,35 @@ function GetFilms($filter) : string {
             }
             
             return $result;
-        case 'latest':
+        case 'actor':
 
-            $sql = "SELECT titre FROM films ORDER BY titre";
-            $record = dbRun($sql)->fetchAll();
 
-            foreach($record as $key => $value)
+            if ($record[$key]["idPersonne"] !== $oldActor || $oldActor == null)
             {
-                $imgName = GetImageName($record, $key);
-                if (strlen($record[$key]["titre"]) > 28)
+                $sql = "SELECT titre, idPersonne, idFilm FROM films WHERE idPersonne";
+                $record = dbRun($sql)->fetchAll(PDO::FETCH_ASSOC);
+                $oldActor = null;
+
+                $oldActor = $record[$key]["idPersonne"];
+                $sql = "SELECT prenom, nom FROM personnes WHERE idPersonne = ( SELECT idPersonne FROM roles WHERE idFilm = :id )";
+
+                foreach($record as $key => $value)
                 {
-                    $record[$key]["titre"] = substr_replace($record[$key]["titre"], "...", 28);
+                    $param = ["id" => $record[$key]["idFilm"]];
+                    $actor = dbRun($sql, $param)->fetch(PDO::FETCH_ASSOC);
+                    $result .= "<div id=\"breakDiv\"><h2 id=\"h2Real\">{$actor["prenom"]} {$actor["nom"]}</h2></div>";
+
+                    $imgName = GetImageName($record, $key);
+                    if (strlen($record[$key]["titre"]) > 28)
+                    {
+                        $record[$key]["titre"] = substr_replace($record[$key]["titre"], "...", 28);
+                    }
+                    $result .= "<div id=\"separatorDiv\">
+                    <img class=\"film\" src=\"img/".$imgName.".jpg\" alt=\"".trim($record[$key]["titre"])."\" onclick=\"window.document.location.href='filminfo.php?film=".trim($record[$key]["titre"])."';\">
+                    <span class=\"txtimg\">{$record[$key]["titre"]}</span></div>";
                 }
-                $result .= "<div id=\"separatorDiv\">
-                <img class=\"film\" src=\"img/{$imgName}.jpg\" alt=\"".trim($record[$key]["titre"])."\" onclick=\"window.document.location.href='filminfo.php?film=".strtolower(trim($record[$key]["titre"]))."';\">
-                <span class=\"txtimg\">{$record[$key]["titre"]}</span></div>";
             }
-           
+            
             return $result;
         default:
             # code...
@@ -284,12 +304,14 @@ function VerificationEmail($email) {
     $pattern = '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
 
     return preg_match($pattern, $email);
+}
 /**
  * Connexion à une BD en utilisant PDO avec un pseudo singleton.
  *
  * @return PDO Un objet PDO
  */
 function dbRun($sql, $param = null) {
+    
     // Préparer la requête SQL
     $statement = db()->prepare($sql);
 

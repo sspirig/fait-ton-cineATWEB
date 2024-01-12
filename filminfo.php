@@ -1,10 +1,12 @@
 <?php
-$filmNom = "";
-$image = "";
+require_once "php/functions.php";
+
+$infos = null;
 $film = filter_input(INPUT_GET, "film", FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
+$infos = GetFilmInfo($film);
 
-
+var_dump($infos);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -23,16 +25,18 @@ $film = filter_input(INPUT_GET, "film", FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 <body>
     <header>
         <div></div> <!-- Future place ptt logo -->
-        <h1>Détail de <?=$filmNom?></h1>
+        <h1>Détail de <?=$infos["title"]?></h1>
         <div><a class="button" href="login.html">Login</a><a  class="button" href="aide.php">Aide</a></div> <!-- Changer le lien -->
     </header>
     <main>
         <?php
-            if ($filmNom != null)
+            if ($infos !== null)
             {
-                echo "<h2>{$filmNom}</h2><div class=\"movieContainer\">\n";
-                echo "{$image}";
-                echo "</div>"; // ajouter les infos du films ici
+                echo "<div class=\"movieContainer\">\n";
+                foreach ($infos as $key => $value) {
+                    echo $value;
+                }
+                echo "</div>";
             }?>
     </main>
     <footer>
